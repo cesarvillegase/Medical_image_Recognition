@@ -23,24 +23,24 @@ class PreprocessingTab(ctk.CTkFrame):
         self.load_dataset_button.place(relx=0.015, rely=0.20, relwidth=0.15, relheight=0.05)
         
         # Create canvas to display images
-        self.image_1 = Image.new("RGB", (240, 240), "white")
-        self.image_2 = Image.new("RGB", (240, 240), "white")
-        self.image_3 = Image.new("RGB", (240, 240), "white")
+        self.image_1 = Image.new("RGB", (320, 320), "white")
+        self.image_2 = Image.new("RGB", (320, 320), "white")
+        self.image_3 = Image.new("RGB", (320, 320), "white")
         
         self.image_label_1 = ctk.CTkLabel(self.master, text="Plot")
-        self.image_label_1.place(relx=0.3, rely=0.3)
+        self.image_label_1.place(relx=0.015, rely=0.3)
         self.image_widget_1 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_1), text="")
-        self.image_widget_1.place(relx=0.3, rely=0.35)
+        self.image_widget_1.place(relx=0.015, rely=0.35)
         
         self.image_label_2 = ctk.CTkLabel(self.master, text="Dataset")
-        self.image_label_2.place(relx=0.5, rely=0.3)
+        self.image_label_2.place(relx=0.315, rely=0.3)
         self.image_widget_2 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_2), text="")
-        self.image_widget_2.place(relx=0.5, rely=0.35)
+        self.image_widget_2.place(relx=0.315, rely=0.35)
         
         self.image_label_3 = ctk.CTkLabel(self.master, text="Dataset")
-        self.image_label_3.place(relx=0.7, rely=0.3)
+        self.image_label_3.place(relx=0.615, rely=0.3)
         self.image_widget_3 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_3), text="")
-        self.image_widget_3.place(relx=0.7, rely=0.35)
+        self.image_widget_3.place(relx=0.615, rely=0.35)
         
     def load_data(self):
         data_dir = r'input\chest_xray\train'
@@ -68,7 +68,7 @@ class PreprocessingTab(ctk.CTkFrame):
         plt.savefig("images\pre_processing\image_1.png")
         plt.close()
         
-        image_1 = Image.open("images\pre_processing\image_1.png").resize((240, 240))
+        image_1 = Image.open("images\pre_processing\image_1.png").resize((320, 320))
         image_1_tk = ImageTk.PhotoImage(image_1)    
         self.image_widget_1.configure(image=image_1_tk)
 
@@ -88,8 +88,8 @@ class PreprocessingTab(ctk.CTkFrame):
         plt.savefig("images\pre_processing\image_3.png")
         plt.close()
         
-        image_2 = Image.open("images\pre_processing\image_2.png").resize((240, 240))
-        image_3 = Image.open("images\pre_processing\image_3.png").resize((240, 240))
+        image_2 = Image.open("images\pre_processing\image_2.png").resize((320, 320))
+        image_3 = Image.open("images\pre_processing\image_3.png").resize((320, 320))
         
         image_2_tk = ImageTk.PhotoImage(image_2)
         image_3_tk = ImageTk.PhotoImage(image_3)
