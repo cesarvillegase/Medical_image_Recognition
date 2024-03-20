@@ -1,0 +1,1 @@
+In this program there's a implementation of the CNN (convolutional neural network) applied in a dataset.
