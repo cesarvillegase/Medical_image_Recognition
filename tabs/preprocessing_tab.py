@@ -22,33 +22,77 @@ class PreprocessingTab(ctk.CTkFrame):
                                                  text="Load Dataset", font=("normal", 14), command=self.load_data, width=180)
         self.load_dataset_button.place(relx=0.015, rely=0.20, relwidth=0.15, relheight=0.05)
         
+        # Create canvas to display images
+        self.image_1 = Image.new("RGB", (240, 240), "white")
+        self.image_2 = Image.new("RGB", (240, 240), "white")
+        self.image_3 = Image.new("RGB", (240, 240), "white")
+        
+        self.image_label_1 = ctk.CTkLabel(self.master, text="Plot")
+        self.image_label_1.place(relx=0.3, rely=0.3)
+        self.image_widget_1 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_1), text="")
+        self.image_widget_1.place(relx=0.3, rely=0.35)
+        
+        self.image_label_2 = ctk.CTkLabel(self.master, text="Dataset")
+        self.image_label_2.place(relx=0.5, rely=0.3)
+        self.image_widget_2 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_2), text="")
+        self.image_widget_2.place(relx=0.5, rely=0.35)
+        
+        self.image_label_3 = ctk.CTkLabel(self.master, text="Dataset")
+        self.image_label_3.place(relx=0.7, rely=0.3)
+        self.image_widget_3 = ctk.CTkLabel(self.master, image=ImageTk.PhotoImage(self.image_3), text="")
+        self.image_widget_3.place(relx=0.7, rely=0.35)
+        
     def load_data(self):
         data_dir = r'input\chest_xray\train'
-        images, labels = get_training_data(data_dir)
+        x_train, y_train = get_training_data(data_dir)
+        
+        labels = ['PNEUMONIA', 'NORMAL']
         
         # Store the loaded data 
-        self.images = images
-        self.labels = labels
+        self.x_train = x_train
+        self.y_train = y_train
+        
+        # Plot label distribution for training data
+        self.plot_label_distribution(self.y_train, 'Training Label Distribution')
         
         # Display the first images 
-        self.display_iamges(images[:5], labels[:5])
+        self.plot_images(self.x_train, self.y_train, labels)
         
-    def display_images(self, images, labels):
-        # Display the images and labels in the canvas
-        self.canvas.delete("all")  # Clear previous images
+    def plot_label_distribution(self, labels, title):
+        unique_labels, counts = np.unique(labels, return_counts=True)
+        colors = ['#ffb703', '#003f88']  # Specify custom colors for each label
+        plt.bar(unique_labels, counts, tick_label=unique_labels, color=colors)
+        plt.title(title)
+        plt.xlabel('Label')
+        plt.ylabel('Count')
+        plt.savefig("images\pre_processing\image_1.png")
+        plt.close()
         
-        # Display images
-        for i, (image, label) in enumerate(zip(images, labels)):
-            # Convert numpy array to ImageTk format
-            image = Image.fromarray(image)
-            image_tk = ImageTk.PhotoImage(image)
-            
-            # Display image on canvas
-            x_offset = i * 100
-            self.canvas.create_image(x_offset, 0, anchor="nw", image=image_tk)
-            
-            # Display label below the image
-            self.canvas.create_text(x_offset, 150, anchor="nw", text=f"Label: {label}")
-            
-            # Keep a reference to avoid garbage collection
-            self.canvas.image = image_tk
+        image_1 = Image.open("images\pre_processing\image_1.png").resize((240, 240))
+        image_1_tk = ImageTk.PhotoImage(image_1)    
+        self.image_widget_1.configure(image=image_1_tk)
+
+        
+    def plot_images(self, x_train, y_train, labels):
+        # Plot the first image
+        plt.figure(figsize=(5, 5))
+        plt.imshow(x_train[0], cmap='gray')
+        plt.title(labels[y_train[0]])  # Get the corresponding label from the labels list
+        plt.savefig("images\pre_processing\image_2.png")
+        plt.close()
+
+        # Plot the last image
+        plt.figure(figsize=(5, 5))
+        plt.imshow(x_train[-1], cmap='gray')
+        plt.title(labels[y_train[-1]])  # Get the corresponding label from the labels list
+        plt.savefig("images\pre_processing\image_3.png")
+        plt.close()
+        
+        image_2 = Image.open("images\pre_processing\image_2.png").resize((240, 240))
+        image_3 = Image.open("images\pre_processing\image_3.png").resize((240, 240))
+        
+        image_2_tk = ImageTk.PhotoImage(image_2)
+        image_3_tk = ImageTk.PhotoImage(image_3)
+        
+        self.image_widget_2.configure(image=image_2_tk)
+        self.image_widget_3.configure(image=image_3_tk)

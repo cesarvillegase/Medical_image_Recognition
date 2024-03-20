@@ -9,7 +9,7 @@ from PIL import Image
 
 from tabs.preprocessing_tab import PreprocessingTab
 
-ctk.set_appearance_mode("system")
+ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
 
 class App(ctk.CTk):
@@ -60,8 +60,8 @@ class App(ctk.CTk):
     
         # GITHUB ICON
         
-        github_image = ctk.CTkImage(light_image=Image.open("images/icon_github.png"),
-                                  dark_image=Image.open("images/icon_github.png"),
+        github_image = ctk.CTkImage(light_image=Image.open("images/sidebar_frame/icon_github.png"),
+                                  dark_image=Image.open("images/sidebar_frame/icon_github.png"),
                                   size=(30, 30))
         button_github = ctk.CTkButton(self.sidebar_frame, text= 'Github', 
                                                 image=github_image, fg_color='transparent', text_color=('black', 'white'),
@@ -69,8 +69,8 @@ class App(ctk.CTk):
         button_github.place(relx=0.025, rely=0.75, relwidth=0.9, relheight=0.05)
         
         # LINKEDIN ICON
-        linkedin = ctk.CTkImage(light_image=Image.open("images/icon_linkedin.png"),
-                                  dark_image=Image.open("images/icon_linkedin.png"),
+        linkedin = ctk.CTkImage(light_image=Image.open("images/sidebar_frame/icon_linkedin.png"),
+                                  dark_image=Image.open("images/sidebar_frame/icon_linkedin.png"),
                                   size=(30, 30))
         button_linkedin = ctk.CTkButton(self.sidebar_frame, text= 'LinkedIn', 
                                                 image=linkedin, fg_color='transparent', text_color=('black', 'white'),
