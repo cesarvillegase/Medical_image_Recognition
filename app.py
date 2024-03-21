@@ -1,14 +1,14 @@
-from typing import Tuple
-import numpy as np
-import pandas as pd
-import customtkinter as ctk
-import matplotlib.pyplot as plt
 import os
 import webbrowser
+import numpy as np
+import pandas as pd
 from PIL import Image
+import customtkinter as ctk
+import matplotlib.pyplot as plt
 
 from tabs.preprocessing_tab import PreprocessingTab
 from tabs.convolution_tab import ConvolutionalTab
+from tabs.autoencoder_tab import AutoEncoderTab
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -96,18 +96,18 @@ class App(ctk.CTk):
         self.setup_tabs(tabview)
         
     def setup_tabs(self, tabview):
-        tabs = ["Preprocessing", "Convolution", "Backpropagation", "AutoEncoder"]
+        tabs = ["Preprocessing", "Convolution", "AutoEncoder"] # , "ART_1"
         for tab_name in tabs:
             tab = tabview.add(tab_name)
             if tab_name == "Preprocessing":
-                preprocessing_tab = PreprocessingTab(master=tab)
+                PreprocessingTab(master=tab)
             if tab_name == "Convolution":
-                convolutional_tab = ConvolutionalTab(master=tab)
-            '''
-            if tab_name == "Backpropgation":
-                self.setup_backprop_tab(tab)
+                ConvolutionalTab(master=tab)
             if tab_name == "AutoEncoder":
-                self.setup_autoencoder(tab)
+                AutoEncoderTab(master=tab)
+            '''
+            if tab_name == "ART_1":
+                ARtTab(master=tab)
             '''
         
     def exit(self):
