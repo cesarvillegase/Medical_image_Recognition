@@ -8,6 +8,7 @@ import webbrowser
 from PIL import Image
 
 from tabs.preprocessing_tab import PreprocessingTab
+from tabs.convolution_tab import ConvolutionalTab
 
 ctk.set_appearance_mode("Light")
 ctk.set_default_color_theme("blue")
@@ -100,9 +101,9 @@ class App(ctk.CTk):
             tab = tabview.add(tab_name)
             if tab_name == "Preprocessing":
                 preprocessing_tab = PreprocessingTab(master=tab)
-            '''
             if tab_name == "Convolution":
-                self.setup_convolution_tab(tab)
+                convolutional_tab = ConvolutionalTab(master=tab)
+            '''
             if tab_name == "Backpropgation":
                 self.setup_backprop_tab(tab)
             if tab_name == "AutoEncoder":

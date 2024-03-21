@@ -22,18 +22,3 @@ def get_training_data(data_dir):
             except Exception as e:
                 print(e)
     return np.array(images), np.array(labels_list)
-
-'''
-# resize data for deep learning 
-x_train = x_train.reshape(-1, img_size, img_size, 1)
-y_train = np.array(y_train)
-
-x_val = x_val.reshape(-1, img_size, img_size, 1)
-y_val = np.array(y_val)
-
-x_test = x_test.reshape(-1, img_size, img_size, 1)
-y_test = np.array(y_test)
-
-print(x_train.shape) 
-
-'''

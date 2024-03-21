@@ -45,7 +45,7 @@ class PreprocessingTab(ctk.CTkFrame):
     def load_data(self):
         data_dir = r'input\chest_xray\train'
         x_train, y_train = get_training_data(data_dir)
-        
+ 
         labels = ['PNEUMONIA', 'NORMAL']
         
         # Store the loaded data 
